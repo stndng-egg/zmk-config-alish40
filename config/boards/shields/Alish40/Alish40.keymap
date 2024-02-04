@@ -51,9 +51,8 @@
                 &trans     &trans                            &trans                &none                      &kp RSHFT  &trans                          &trans    &trans   
             >;
         };
-
-&led_strip {
+    };
+    &led_strip {
     chain-length = <10>;
-};
     };
 };
