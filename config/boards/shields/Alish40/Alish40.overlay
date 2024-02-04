@@ -41,7 +41,9 @@
 			RC(6,0) RC(7,0) RC(6,1) RC(6,2) RC(7,3) RC(6,4) RC(7,5) RC(6,5)
         >;
     };
-	chosen {
+};
+/ {
+    chosen {
         zmk,underglow = &led_strip;
     };
 };
