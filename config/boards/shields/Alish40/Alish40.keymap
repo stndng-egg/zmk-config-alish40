@@ -8,37 +8,40 @@
 
         default_layer {
             bindings = <
-                &kp TAB    &kp Q   &kp W    &kp E   &kp R   &kp T           &kp Y   &kp U   &kp I       &kp O        &kp P        &kp BACKSPACE
-                &kp CAPS   &kp A   &kp S    &kp D   &kp F   &kp G           &kp H   &kp J   &kp K       &kp L        &kp SEMI     &kp RETURN
-                &kp LSHIFT &kp Z   &kp X    &kp C   &kp V   &kp B   &kp B   &kp N   &kp M   &kp COMMA   &kp PERIOD                &kp RSHFT
-                &kp LCTRL   &kp LWIN   &mo 1   &kp SPACE   &kp SPACE   &kp RALT   &kp RWIN   &mo 2
+                &kp TAB        &kp Q   &kp W    &kp E   &kp R   &kp T           &kp Y   &kp U   &kp I       &kp O        &kp P              &kp BACKSPACE
+                &lt NUM_L DEL  &kp A   &kp S    &kp D   &kp F   &kp G           &kp H   &kp J   &kp K       &kp L        &lt NAV_L SEMI     &kp RETURN
+                &kp LSHIFT     &kp Z   &kp X    &kp C   &kp V   &kp B   &kp B   &kp N   &kp M   &kp COMMA   &kp PERIOD                      &kp RSHFT
+                &kp LCTRL      &kp LWIN         &kp LALT     &lt SYM_L SPACE    &kp SPACE   &kp RALT                     &kp K_APP          &kp RCTRL
             >;
         };
 
         layer_1 {
+            label = "Nav";
             bindings = <
-                &kp TAB   &kp N1   &kp N2   &kp N3   &kp N4   &kp N5   &kp N6   &kp N7   &kp N8   &kp N9   &kp N0   &none   
-                &none   &none   &none   &none   &none   &kp MINUS   &kp SEMI   &kp APOS   &kp LBKT   &kp RBKT   &none  &none   
-                &none   &none   &none   &none   &none   &none   &none   &none   &none   &none   &none   &none   &bootloader   
-                &none   &none   &none   &none   &none   &bt BT_CLR   &bt BT_SEL 0   &bt BT_SEL 1   
+                &bt BT_CLR  &bt BT(0)  &bt BT(1)  &bt BT(2)  &bt BT(3)        &bt BT(4)        &kp PG_UP   &kp HOME  &kp UP    &kp END    &none  &trans
+                &none       &none      &kp PSCRN  &kp SLCK   &kp PAUSE_BREAK  &none            &kp PG_DN   &kp LEFT  &kp DOWN  &kp RIGHT  &none  &trans
+                &trans      &none      &none      &none      &none            &none    &none   &none       &none     &none     &none             &trans
+                &trans      &trans                &trans          &none                        &trans    &trans                           &trans &trans   
             >;
         };
 
         layer_2 {
+            label = "Num";
             bindings = <
-                &none   &kp F1   &kp F2   &kp F3   &kp F4   &kp F5   &kp F6   &kp F7   &kp F8   &kp F9   &kp F10   &none   
-                &none   &kp UP_ARROW   &none   &none   &none   &none   &none   &none   &none   &kp C_VOL_UP  &none  &none 
-                &none   &kp LEFT_ARROW   &kp DOWN_ARROW   &kp RIGHT_ARROW   &none   &none   &none   &none   &none   &none   &kp C_VOL_DN   &kp C_PP   &none 
-                &none   &none   &none   &none   &none   &none   &none   &none   
+                &kp ESC  &kp F1  &kp F2   &kp F3   &kp F4   &none         &kp KP_MULTIPLY  &kp KP_N7  &kp KP_N8  &kp KP_N9  &kp KP_DIVIDE  &trans
+                &none    &kp F5  &kp F6   &kp F7   &kp F8   &none         &kp KP_PLUS      &kp KP_N4  &kp KP_N5  &kp KP_N6  &kp KP_MINUS   &trans
+                &trans   &kp F9  &kp F10  &kp F11  &kp F12  &none  &none  &kp K_CALC       &kp KP_N1  &kp KP_N2  &kp KP_N3                 &trans
+                &trans   &trans           &trans         &none            &kp KP_N0   &kp KP_DOT                            &none          &none    
             >;
         };
 
         layer_3 {
+            label = "Sym";
             bindings = <
-                &kp TAB   &kp N1   &kp N2   &kp N3   &kp N4   &kp N5   &kp N6   &kp N7   &kp N8   &kp N9   &kp N0   &none   
-                &none   &none   &none   &none   &none   &kp MINUS   &kp SEMI   &kp APOS   &kp LBKT   &kp RBKT   &none  &none   
-                &none   &none   &none   &none   &none   &none   &none   &none   &none   &none   &none   &none   &bootloader   
-                &none   &none   &none   &none   &none   &bt BT_CLR   &bt BT_SEL 0   &bt BT_SEL 1   
+                &kp GRAVE  &kp N1  &kp N2  &kp N3  &kp N4  &kp N5        &kp N6     &kp N7     &kp N8     &kp N9    &kp N0    &trans
+                &kp CAPS   &none   &none   &none   &none   &none         &none      &kp MINUS  &kp EQUAL  &kp BSLH  &kp APOS  &trans
+                &trans     &none   &none   &none   &none   &none  &none  &none      &kp FSLH   &kp LBKT   &kp PG_UP           &trans
+                &trans     &trans          &trans        &none           &kp RSHFT  &trans                          &trans    &trans   
             >;
         };
     };
