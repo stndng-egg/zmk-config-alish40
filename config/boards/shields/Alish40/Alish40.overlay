@@ -9,6 +9,7 @@
 
 	default_kscan: kscan {
 		compatible = "zmk,kscan-gpio-matrix";
+		wakeup-source;
 		label = "default_kscan";
 		diode-direction = "col2row";
 
@@ -47,7 +48,7 @@
 / {
     soft_off_wakers {
         compatible = "zmk,soft-off-wakeup-sources";
-        wakeup-sources = <&wakeup_scan>;
+        wakeup-sources = <&default_kscan>;
     };
 };
 
