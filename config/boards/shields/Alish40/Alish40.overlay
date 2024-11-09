@@ -9,9 +9,9 @@
 
 	default_kscan: kscan {
 		compatible = "zmk,kscan-gpio-matrix";
-		wakeup-source;
 		label = "default_kscan";
 		diode-direction = "col2row";
+		wakeup-source;
 
 		row-gpios = <&pro_micro 21  (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
 			     , <&pro_micro 1 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
@@ -41,14 +41,6 @@
 			RC(5,0) RC(4,0) RC(5,1) RC(4,1) RC(5,2) RC(4,2) RC(5,3) RC(4,3) RC(5,4) RC(4,4) RC(5,5) RC(4,5)
 			RC(6,0) RC(7,0) RC(6,1) RC(6,2) RC(7,3) RC(6,4) RC(7,5) RC(6,5)
         >;
-    };
-};
-
-
-/ {
-    soft_off_wakers {
-        compatible = "zmk,soft-off-wakeup-sources";
-        wakeup-sources = <&default_kscan>;
     };
 };
 
