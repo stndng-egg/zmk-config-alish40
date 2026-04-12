@@ -6,6 +6,11 @@
 #define MK(row, col) (((row) << 8) | (col))
 
 / {
+    zmk_key_physical_attrs: zmk_key_physical_attrs {
+    };
+};
+
+/ {
     chosen {
         zmk,kscan = &default_kscan;
         zmk,underglow = &led_strip;
