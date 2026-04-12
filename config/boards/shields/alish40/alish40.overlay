@@ -2,60 +2,53 @@
 #include <dt-bindings/led/led.h>
 
 #define ZMK_KEY_PHYSICAL_ATTRS(w, h, x, y) &zmk_key_physical_attrs w h x y 0 0 0
-
 #define MK(row, col) (((row) << 8) | (col))
 
 / {
-    zmk_key_physical_attrs: zmk_key_physical_attrs {
-        compatible = "zmk,key-physical-attrs"; /* 호환성 선언 */
-        #key-cells = <7>;                      /* 핵심: 숫자 7개를 받겠다는 뜻 */
-    };
-    vcc_cutoff: vcc_cutoff {
-        compatible = "zmk,ext-power-generic";
-        control-gpios = <&gpio0 13 GPIO_ACTIVE_HIGH>; // P0.13 핀 사용
-    };
-};
-
-/ {
+    /* 1. 핵심 선택 노드 - 모든 기능의 입구를 하나로 통합 */
     chosen {
         zmk,kscan = &default_kscan;
         zmk,underglow = &led_strip;
-        /* ZMK Studio 실시간 수정을 위해 아래 줄이 반드시 필요합니다 */
         zmk,physical-layout = &phys_layout;
         zmk,matrix-transform = &default_transform;
-
-        /* ZMK Studio 통신을 위해 이 두 줄이 들어 있는지 확인하세요 */
+        
+        /* ZMK Studio 통신 및 저장소 설정 (에러 해결의 핵심) */
         zephyr,console = &cdc_acm_uart;
         zephyr,shell-uart = &cdc_acm_uart;
-        /* 저장 공간을 지정합니다 */
         zmk,storage = &storage_partition;
     };
 
-    /* Physical Layout 정의 */
+    /* 2. 기하학적 속성 정의 */
+    zmk_key_physical_attrs: zmk_key_physical_attrs {
+        compatible = "zmk,key-physical-attrs";
+        #key-cells = <7>;
+    };
+
+    /* 3. 외부 전원 제어 (이름 중복 방지를 위해 vcc_ctrl로 변경) */
+    vcc_ctrl: vcc_ctrl {
+        compatible = "zmk,ext-power-generic";
+        control-gpios = <&gpio0 13 GPIO_ACTIVE_HIGH>; // P0.13 핀 사용
+    };
+
+    /* 4. Physical Layout */
     phys_layout: phys_layout {
         compatible = "zmk,physical-layout";
         display-name = "Default Layout";
         transform = <&default_transform>;
         kscan = <&default_kscan>;
-
-        /* ZMK Studio 필수 속성: 매트릭스 변환 맵의 순서와 일치해야 합니다. */
         keys
-            /* Row 1 */
             = <ZMK_KEY_PHYSICAL_ATTRS(150, 50, 0, 0)>, <ZMK_KEY_PHYSICAL_ATTRS(100, 100, 150, 0)>, <ZMK_KEY_PHYSICAL_ATTRS(100, 100, 250, 0)>, <ZMK_KEY_PHYSICAL_ATTRS(100, 100, 350, 0)>, <ZMK_KEY_PHYSICAL_ATTRS(100, 100, 450, 0)>, <ZMK_KEY_PHYSICAL_ATTRS(100, 100, 550, 0)>, <ZMK_KEY_PHYSICAL_ATTRS(100, 100, 750, 0)>, <ZMK_KEY_PHYSICAL_ATTRS(100, 100, 850, 0)>, <ZMK_KEY_PHYSICAL_ATTRS(100, 100, 950, 0)>, <ZMK_KEY_PHYSICAL_ATTRS(100, 100, 1050, 0)>, <ZMK_KEY_PHYSICAL_ATTRS(100, 100, 1150, 0)>, <ZMK_KEY_PHYSICAL_ATTRS(150, 100, 1250, 0)>
-            /* Row 2 */
             , <ZMK_KEY_PHYSICAL_ATTRS(175, 100, 0, 100)>, <ZMK_KEY_PHYSICAL_ATTRS(100, 100, 175, 100)>, <ZMK_KEY_PHYSICAL_ATTRS(100, 100, 275, 100)>, <ZMK_KEY_PHYSICAL_ATTRS(100, 100, 375, 100)>, <ZMK_KEY_PHYSICAL_ATTRS(100, 100, 475, 100)>, <ZMK_KEY_PHYSICAL_ATTRS(100, 100, 575, 100)>, <ZMK_KEY_PHYSICAL_ATTRS(100, 100, 775, 100)>, <ZMK_KEY_PHYSICAL_ATTRS(100, 100, 875, 100)>, <ZMK_KEY_PHYSICAL_ATTRS(100, 100, 975, 100)>, <ZMK_KEY_PHYSICAL_ATTRS(100, 100, 1075, 100)>, <ZMK_KEY_PHYSICAL_ATTRS(100, 100, 1175, 100)>, <ZMK_KEY_PHYSICAL_ATTRS(125, 100, 1275, 100)>
-            /* Row 3 */
             , <ZMK_KEY_PHYSICAL_ATTRS(225, 100, 0, 200)>, <ZMK_KEY_PHYSICAL_ATTRS(100, 100, 225, 200)>, <ZMK_KEY_PHYSICAL_ATTRS(100, 100, 325, 200)>, <ZMK_KEY_PHYSICAL_ATTRS(100, 100, 425, 200)>, <ZMK_KEY_PHYSICAL_ATTRS(100, 100, 525, 200)>, <ZMK_KEY_PHYSICAL_ATTRS(100, 100, 625, 200)>, <ZMK_KEY_PHYSICAL_ATTRS(100, 100, 725, 200)>, <ZMK_KEY_PHYSICAL_ATTRS(100, 100, 825, 200)>, <ZMK_KEY_PHYSICAL_ATTRS(100, 100, 925, 200)>, <ZMK_KEY_PHYSICAL_ATTRS(100, 100, 1025, 200)>, <ZMK_KEY_PHYSICAL_ATTRS(100, 100, 1125, 200)>, <ZMK_KEY_PHYSICAL_ATTRS(175, 100, 1225, 200)>
-            /* Row 4 */
             , <ZMK_KEY_PHYSICAL_ATTRS(125, 100, 0, 300)>, <ZMK_KEY_PHYSICAL_ATTRS(125, 100, 125, 300)>, <ZMK_KEY_PHYSICAL_ATTRS(125, 100, 350, 300)>, <ZMK_KEY_PHYSICAL_ATTRS(225, 100, 475, 300)>, <ZMK_KEY_PHYSICAL_ATTRS(275, 100, 700, 300)>, <ZMK_KEY_PHYSICAL_ATTRS(125, 100, 975, 300)>, <ZMK_KEY_PHYSICAL_ATTRS(125, 100, 1150, 300)>, <ZMK_KEY_PHYSICAL_ATTRS(125, 100, 1275, 300)>
             ;
     };
 
+    /* 5. Kscan */
     default_kscan: kscan {
         compatible = "zmk,kscan-gpio-matrix";
         diode-direction = "col2row";
         wakeup-source;
-
         row-gpios = <&pro_micro 21 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>,
                     <&pro_micro 1  (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>,
                     <&pro_micro 4  (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>,
@@ -64,7 +57,6 @@
                     <&pro_micro 7  (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>,
                     <&pro_micro 19 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>,
                     <&pro_micro 18 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>;
-            
         col-gpios = <&pro_micro 0  GPIO_ACTIVE_HIGH>,
                     <&pro_micro 2  GPIO_ACTIVE_HIGH>,
                     <&pro_micro 3  GPIO_ACTIVE_HIGH>,
@@ -73,6 +65,7 @@
                     <&pro_micro 15 GPIO_ACTIVE_HIGH>;
     };
 
+    /* 6. Matrix Transform */
     default_transform: matrix_transform {
         compatible = "zmk,matrix-transform";
         rows = <8>;
@@ -86,19 +79,14 @@
     };
 };
 
-/* LED 핀 설정 (0, 29번 사용) */
+/* --- 외부 노드 설정 --- */
+
 &pinctrl {
     spi3_default: spi3_default {
-        group1 {
-            psels = <NRF_PSEL(SPIM_MOSI, 0, 29)>;
-        };
+        group1 { psels = <NRF_PSEL(SPIM_MOSI, 0, 29)>; };
     };
-
     spi3_sleep: spi3_sleep {
-        group1 {
-            psels = <NRF_PSEL(SPIM_MOSI, 0, 29)>;
-            low-power-enable;
-        };
+        group1 { psels = <NRF_PSEL(SPIM_MOSI, 0, 29)>; low-power-enable; };
     };
 };
 
@@ -108,7 +96,6 @@
     pinctrl-0 = <&spi3_default>;
     pinctrl-1 = <&spi3_sleep>;
     pinctrl-names = "default", "sleep";
-
     led_strip: ws2812@0 {
         compatible = "worldsemi,ws2812-spi";
         reg = <0>;
@@ -128,16 +115,13 @@
 };
 
 &flash0 {
-    reg = <0x00000000 DT_SIZE_K(1024)>; /* 전체 플래시 크기 명시 */
     partitions {
         compatible = "fixed-partitions";
         #address-cells = <1>;
         #size-cells = <1>;
-
-        /* nice!nano v2의 빈 공간을 사용하는 안전한 파티션 */
         storage_partition: partition@ec000 {
             label = "storage";
-            reg = <0x000ec000 DT_SIZE_K(32)>; 
+            reg = <0x000ec000 DT_SIZE_K(32)>;
         };
     };
 };
