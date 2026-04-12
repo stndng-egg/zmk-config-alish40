@@ -27,6 +27,8 @@
         /* ZMK Studio 통신을 위해 이 두 줄이 들어 있는지 확인하세요 */
         zephyr,console = &cdc_acm_uart;
         zephyr,shell-uart = &cdc_acm_uart;
+        /* 저장 공간을 지정합니다 */
+        zmk,storage = &storage_partition;
     };
 
     /* Physical Layout 정의 */
@@ -141,5 +143,21 @@
     status = "okay";
     cdc_acm_uart: cdc_acm_uart {
         compatible = "zephyr,cdc-acm-uart";
+    };
+};
+
+&flash0 {
+    /* Zephyr 파티션 관리자 설정 */
+    partitions {
+        compatible = "fixed-partitions";
+        #address-cells = <1>;
+        #size-cells = <1>;
+
+        /* 기존 부트로더 등이 사용하는 영역 뒤에 Studio용 저장 공간을 만듭니다. */
+        /* 주소와 크기는 nice!nano v2 표준 규격을 따릅니다. */
+        storage_partition: partition@ec000 {
+            label = "storage";
+            reg = <0x000ec000 0x00008000>;
+        };
     };
 };
