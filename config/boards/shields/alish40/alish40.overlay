@@ -1,9 +1,7 @@
 #include <dt-bindings/zmk/matrix_transform.h>
 #include <dt-bindings/led/led.h>
 
-#ifndef ZMK_KEY_PHYSICAL_ATTRS
-#define ZMK_KEY_PHYSICAL_ATTRS(width, height, x, y) width height x y
-#endif
+#define ZMK_KEY_PHYSICAL_ATTRS(w, h, x, y) &zmk_key_physical_attrs w h x y
 
 #define MK(row, col) (((row) << 8) | (col))
 
