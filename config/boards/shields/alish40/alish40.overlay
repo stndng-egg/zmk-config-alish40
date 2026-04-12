@@ -77,17 +77,19 @@
 
 /* --- 3. 외부 노드 및 플래시 설정 (주소 변경) --- */
 
+/* 3-1. 기존에 보드 설정에 들어있을지 모르는 노드를 삭제 */
+/delete-node/ &storage_partition;
+
+/* 3-2. 다시 깨끗하게 정의 */
 &flash0 {
-    reg = <0x00000000 DT_SIZE_K(1024)>;
     partitions {
         compatible = "fixed-partitions";
         #address-cells = <1>;
         #size-cells = <1>;
 
-        /* nice!nano의 가장 끝 부분 주소(0xf8000)를 사용해 충돌 방지 */
-        storage_partition: partition@f8000 {
+        storage_partition: partition@ec000 {
             label = "storage";
-            reg = <0x000f8000 DT_SIZE_K(32)>;
+            reg = <0x000ec000 DT_SIZE_K(32)>;
         };
     };
 };
