@@ -15,10 +15,6 @@
 
 / {
 
-    chosen {
-        zmk,physical-layout = &layout_alice_40_all;
-    };
-
     combos {
         compatible = "zmk,combos";
         combo_esc {
