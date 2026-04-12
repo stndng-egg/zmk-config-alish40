@@ -5,32 +5,30 @@
 #define MK(row, col) (((row) << 8) | (col))
 
 / {
-    /* 1. 핵심 선택 노드 - 모든 기능의 입구를 하나로 통합 */
+    /* 1. Chosen 설정을 최상단으로 배치 */
     chosen {
         zmk,kscan = &default_kscan;
         zmk,underglow = &led_strip;
         zmk,physical-layout = &phys_layout;
         zmk,matrix-transform = &default_transform;
         
-        /* ZMK Studio 통신 및 저장소 설정 (에러 해결의 핵심) */
+        /* Studio 필수 설정 */
         zephyr,console = &cdc_acm_uart;
         zephyr,shell-uart = &cdc_acm_uart;
         zmk,storage = &storage_partition;
     };
 
-    /* 2. 기하학적 속성 정의 */
     zmk_key_physical_attrs: zmk_key_physical_attrs {
         compatible = "zmk,key-physical-attrs";
         #key-cells = <7>;
     };
 
-    /* 3. 외부 전원 제어 (이름 중복 방지를 위해 vcc_ctrl로 변경) */
     vcc_ctrl: vcc_ctrl {
         compatible = "zmk,ext-power-generic";
-        control-gpios = <&gpio0 13 GPIO_ACTIVE_HIGH>; // P0.13 핀 사용
+        control-gpios = <&gpio0 13 GPIO_ACTIVE_HIGH>;
     };
 
-    /* 4. Physical Layout */
+    /* 2. Physical Layout 및 기타 노드들 */
     phys_layout: phys_layout {
         compatible = "zmk,physical-layout";
         display-name = "Default Layout";
@@ -44,7 +42,6 @@
             ;
     };
 
-    /* 5. Kscan */
     default_kscan: kscan {
         compatible = "zmk,kscan-gpio-matrix";
         diode-direction = "col2row";
@@ -65,7 +62,6 @@
                     <&pro_micro 15 GPIO_ACTIVE_HIGH>;
     };
 
-    /* 6. Matrix Transform */
     default_transform: matrix_transform {
         compatible = "zmk,matrix-transform";
         rows = <8>;
@@ -79,7 +75,22 @@
     };
 };
 
-/* --- 외부 노드 설정 --- */
+/* --- 3. 외부 노드 및 플래시 설정 (주소 변경) --- */
+
+&flash0 {
+    reg = <0x00000000 DT_SIZE_K(1024)>;
+    partitions {
+        compatible = "fixed-partitions";
+        #address-cells = <1>;
+        #size-cells = <1>;
+
+        /* nice!nano의 가장 끝 부분 주소(0xf8000)를 사용해 충돌 방지 */
+        storage_partition: partition@f8000 {
+            label = "storage";
+            reg = <0x000f8000 DT_SIZE_K(32)>;
+        };
+    };
+};
 
 &pinctrl {
     spi3_default: spi3_default {
@@ -111,17 +122,5 @@
     status = "okay";
     cdc_acm_uart: cdc_acm_uart {
         compatible = "zephyr,cdc-acm-uart";
-    };
-};
-
-&flash0 {
-    partitions {
-        compatible = "fixed-partitions";
-        #address-cells = <1>;
-        #size-cells = <1>;
-        storage_partition: partition@ec000 {
-            label = "storage";
-            reg = <0x000ec000 DT_SIZE_K(32)>;
-        };
     };
 };
