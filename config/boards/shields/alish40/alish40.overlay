@@ -10,7 +10,7 @@
         compatible = "zmk,key-physical-attrs"; /* 호환성 선언 */
         #key-cells = <7>;                      /* 핵심: 숫자 7개를 받겠다는 뜻 */
     };
-    ext-power {
+    ext_power: ext_power {
         compatible = "zmk,ext-power-generic";
         control-gpios = <&gpio0 13 GPIO_ACTIVE_HIGH>; // P0.13 핀 사용
     };
@@ -83,25 +83,6 @@
             MK(5,0) MK(4,0) MK(5,1) MK(4,1) MK(5,2) MK(4,2) MK(5,3) MK(4,3) MK(5,4) MK(4,4) MK(5,5) MK(4,5)
             MK(6,0) MK(7,0) MK(6,1) MK(6,2) MK(7,3) MK(6,4) MK(7,5) MK(6,5)
         >;
-    };
-
-    wakeup_scan: wakeup_scan {
-        compatible = "zmk,gpio-key-wakeup-trigger";
-        trigger = <&soft_off_gpio_key>;
-        wakeup-source;
-        extra-gpios = <&pro_micro 15 GPIO_ACTIVE_HIGH>;
-    };
-
-    soft_off_wakers {
-        compatible = "zmk,soft-off-wakeup-sources";
-        wakeup-sources = <&wakeup_scan>;
-    };
-
-    gpio_keys { /* 'keys' 노드 이름이 physical-layout 속성과 충돌하지 않도록 gpio_keys로 변경 */
-        compatible = "gpio-keys";
-        soft_off_gpio_key: soft_off_gpio_key {
-            gpios = <&pro_micro 18 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>;
-        };
     };
 };
 
