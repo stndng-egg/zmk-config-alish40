@@ -147,17 +147,16 @@
 };
 
 &flash0 {
-    /* Zephyr 파티션 관리자 설정 */
+    reg = <0x00000000 DT_SIZE_K(1024)>; /* 전체 플래시 크기 명시 */
     partitions {
         compatible = "fixed-partitions";
         #address-cells = <1>;
         #size-cells = <1>;
 
-        /* 기존 부트로더 등이 사용하는 영역 뒤에 Studio용 저장 공간을 만듭니다. */
-        /* 주소와 크기는 nice!nano v2 표준 규격을 따릅니다. */
+        /* nice!nano v2의 빈 공간을 사용하는 안전한 파티션 */
         storage_partition: partition@ec000 {
             label = "storage";
-            reg = <0x000ec000 0x00008000>;
+            reg = <0x000ec000 DT_SIZE_K(32)>; 
         };
     };
 };
