@@ -22,6 +22,11 @@
         zmk,underglow = &led_strip;
         /* ZMK Studio 실시간 수정을 위해 아래 줄이 반드시 필요합니다 */
         zmk,physical-layout = &phys_layout;
+        zmk,matrix-transform = &default_transform;
+
+        /* ZMK Studio 통신을 위해 이 두 줄이 들어 있는지 확인하세요 */
+        zephyr,console = &cdc_acm_uart;
+        zephyr,shell-uart = &cdc_acm_uart;
     };
 
     /* Physical Layout 정의 */
