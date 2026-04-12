@@ -13,7 +13,11 @@
 };
 
 
+
 / {
+     chosen {
+        zmk,physical-layout = &default_layout;
+    };
 
     combos {
         compatible = "zmk,combos";
