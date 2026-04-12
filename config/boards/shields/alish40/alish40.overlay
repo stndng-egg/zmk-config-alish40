@@ -106,3 +106,15 @@
         compatible = "zephyr,cdc-acm-uart";
     };
 };
+
+/ {
+    phys_layout: phys_layout {
+        compatible = "zmk,physical-layout";
+        display-name = "Alish40";
+        transform = <&default_transform>;
+        kscan = <&default_kscan>;
+        /* 알림: 'alish40-layouts.dtsi' 파일 안에 각 키의 좌표(keys 속성)가 
+           정의되어 있어야 Studio 화면에 키보드가 정상적으로 출력됩니다.
+        */
+    };
+};
