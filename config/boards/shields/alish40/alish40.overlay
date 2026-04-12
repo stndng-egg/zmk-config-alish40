@@ -2,7 +2,6 @@
 #include <dt-bindings/led/led.h>
 #include "alish40-layouts.dtsi"
 
-#define ZMK_KEY_PHYSICAL_ATTRS(w, h, x, y) &zmk_key_physical_attrs w h x y 0 0 0
 #define MK(row, col) (((row) << 8) | (col))
 
 / {
