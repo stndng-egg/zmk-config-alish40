@@ -1,2 +1,0 @@
-config SHIELD_ALISH40
-    def_bool $(shields_list_contains,Alish40)
