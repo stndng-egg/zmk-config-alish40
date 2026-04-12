@@ -7,6 +7,8 @@
 
 / {
     zmk_key_physical_attrs: zmk_key_physical_attrs {
+        compatible = "zmk,key-physical-attrs"; /* 호환성 선언 */
+        #key-cells = <4>;                      /* 핵심: 숫자 4개를 받겠다는 뜻 */
     };
 };
 
