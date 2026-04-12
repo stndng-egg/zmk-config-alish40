@@ -1,9 +1,9 @@
+#include "alish40-layouts.dtsi"
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/rgb.h>
 #include <dt-bindings/zmk/ext_power.h>
-#include "alish40-layouts.dtsi"
 
 #define MK(row, col) (((row) << 8) | (col))
 
