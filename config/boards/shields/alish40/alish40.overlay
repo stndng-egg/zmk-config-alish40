@@ -11,7 +11,7 @@
     };
 
     /* ZMK Studio가 인식할 물리적 레이아웃 정의 */
-    default_layout: virtual_layout {
+    default_layout: default_layout {
         compatible = "zmk,physical-layout";
         display-name = "Default Layout";
         transform = <&default_transform>;
