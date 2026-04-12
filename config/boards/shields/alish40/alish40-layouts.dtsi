@@ -1,5 +1,7 @@
 #include <dt-bindings/zmk/matrix_transform.h>
 
+#define ZMK_KEY_PHYSICAL_ATTRS(w, h, x, y) &zmk_key_physical_attrs w h x y 0 0 0
+
 / {
     zmk_key_physical_attrs: zmk_key_physical_attrs {
         compatible = "zmk,key-physical-attrs";
