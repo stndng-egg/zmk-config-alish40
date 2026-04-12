@@ -1,6 +1,6 @@
+#include "alish40-layouts.dtsi"
 #include <dt-bindings/zmk/matrix_transform.h>
 #include <dt-bindings/led/led.h>
-#include "alish40-layouts.dtsi"
 
 #define MK(row, col) (((row) << 8) | (col))
 
