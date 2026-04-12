@@ -7,11 +7,11 @@
         zmk,matrix_transform = &default_transform;
         zmk,underglow = &led_strip;
         /* ZMK Studio 실시간 수정을 위해 아래 줄이 반드시 필요합니다 */
-        zmk,physical-layout = &default_layout;
+        zmk,physical-layout = &phys_layout;
     };
 
-    /* ZMK Studio가 인식할 물리적 레이아웃 정의 */
-    default_layout: default_layout {
+    /* Physical Layout 정의 */
+    phys_layout: phys_layout {
         compatible = "zmk,physical-layout";
         display-name = "Default Layout";
         transform = <&default_transform>;
