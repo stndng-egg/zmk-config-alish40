@@ -9,7 +9,7 @@
         zmk,kscan = &default_kscan;
         zmk,underglow = &led_strip;
         zmk,physical-layout = &phys_layout;
-        zmk,matrix-transform = &default_transform;
+        /* zmk,matrix-transform = &default_transform; 이거 없어야 한다고 함 */
         
         /* Studio 필수 설정 */
         zephyr,console = &cdc_acm_uart;
