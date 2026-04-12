@@ -10,7 +10,7 @@
         compatible = "zmk,key-physical-attrs"; /* 호환성 선언 */
         #key-cells = <7>;                      /* 핵심: 숫자 7개를 받겠다는 뜻 */
     };
-    ext_power: ext_power {
+    vcc_cutoff: vcc_cutoff {
         compatible = "zmk,ext-power-generic";
         control-gpios = <&gpio0 13 GPIO_ACTIVE_HIGH>; // P0.13 핀 사용
     };
