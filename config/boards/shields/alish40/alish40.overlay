@@ -57,10 +57,6 @@
 
 /* --- 3. 외부 노드 및 플래시 설정 (주소 변경) --- */
 
-/* 3-1. 기존에 보드 설정에 들어있을지 모르는 노드를 삭제 */
-/delete-node/ &storage_partition;
-
-/* 3-2. 다시 깨끗하게 정의 */
 &flash0 {
     partitions {
         compatible = "fixed-partitions";
