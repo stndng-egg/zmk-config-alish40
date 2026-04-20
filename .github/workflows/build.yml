@@ -16,14 +16,13 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          # 1. 보드는 nice_nano_v2, 쉴드는 alish40으로 설정합니다.
           - board: nice_nano_v2
             shield: alish40
     steps:
       - name: Checkout
-        uses: actions/checkout@v4 # v6 대신 안정적인 v4 권장
+        uses: actions/checkout@v6
       - name: Cache west modules
-        uses: actions/cache@v4 # v5 대신 안정적인 v4 권장
+        uses: actions/cache@v5
         env:
           cache-name: cache-zephyr-modules
         with:
@@ -67,7 +66,7 @@ jobs:
           -DCONFIG_ZMK_STUDIO=y \
           -DSNIPPET=studio-rpc-usb-uart
       - name: Archive artifacts
-        uses: actions/upload-artifact@v4 # v7 대신 안정적인 v4 권장
+        uses: actions/upload-artifact@v7
         with:
           name: ${{ steps.variables.outputs.artifact-name }}
           path: |
