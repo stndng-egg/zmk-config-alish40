@@ -3,8 +3,4 @@ if SHIELD_ALISH40
 config ZMK_KEYBOARD_NAME
     default "alish40"
 
-config ZMK_RGB_UNDERGLOW_LEDS
-    int "Underglow LED count"
-    default 10
-
 endif
