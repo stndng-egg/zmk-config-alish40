@@ -57,7 +57,6 @@
     zmk_rgb_underglow: zmk_rgb_underglow {
         compatible = "zmk,rgb-underglow";
         led-strip = <&led_strip>;
-        chain-length = <10>;
     };
 
 };
